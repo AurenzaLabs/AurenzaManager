@@ -1,8 +1,5 @@
-fastapi
-uvicorn
-pymongo
-python-jose
-passlib[bcrypt]
-streamlit
-requests
+streamlit 
+pymongo 
+pandas 
+plotly 
 python-dotenv
