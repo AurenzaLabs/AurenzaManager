@@ -24,6 +24,7 @@ with st.form("add_tx"):
         tx_date = st.date_input("Transaction Date")
 
     with col2:
+        paid_by = st.multiselect("Paid By", ["Abhishek","Nitish","Selva","Aurenza"])
         payment = st.selectbox("Payment Mode", ["Cash", "Card", "UPI", "Bank"])
         tx_type = st.radio("Type", ["Income", "Expense"])
         image = st.file_uploader("Upload Image (optional)", type=["png", "jpg", "jpeg", "gif"])
@@ -35,6 +36,7 @@ with st.form("add_tx"):
             "title": title,
             "amount": float(amount),
             "tags": tags,
+            "paid_by": paid_by,
             "payment": payment,
             "type": tx_type,
             "date": datetime.combine(tx_date, datetime.min.time()).isoformat()
