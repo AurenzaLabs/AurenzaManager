@@ -1,7 +1,7 @@
 streamlit 
-pymongo 
+supabase
+psycopg2-binary
 pandas 
 plotly 
 python-dotenv
 bcrypt
-certifi

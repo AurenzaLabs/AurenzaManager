@@ -1,9 +1,14 @@
-from pymongo import MongoClient
+from supabase import create_client, Client
 import os
 from dotenv import load_dotenv
+
 load_dotenv()
 
-client = MongoClient(os.getenv("MONGO_URI"))
-db = client["money_manager"]
-collection = db["transactions"]
-users_collection = db["users"]
+# Initialize Supabase client
+supabase_url = os.getenv("SUPABASE_URL")
+supabase_key = os.getenv("SUPABASE_KEY")
+
+if not supabase_url or not supabase_key:
+    raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in .env file")
+
+supabase: Client = create_client(supabase_url, supabase_key)

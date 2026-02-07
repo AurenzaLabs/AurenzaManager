@@ -1,5 +1,5 @@
 import streamlit as st
-from db import collection
+from db import supabase
 from datetime import datetime
 import sys
 import os
@@ -33,11 +33,11 @@ with st.form("add_tx"):
     if submit:
         tx_data = {
             "title": title,
-            "amount": amount,
+            "amount": float(amount),
             "tags": tags,
             "payment": payment,
             "type": tx_type,
-            "date": datetime.combine(tx_date, datetime.min.time())
+            "date": datetime.combine(tx_date, datetime.min.time()).isoformat()
         }
         
         # Add image if uploaded
@@ -45,5 +45,9 @@ with st.form("add_tx"):
             tx_data["image"] = image.read()
             tx_data["image_name"] = image.name
         
-        collection.insert_one(tx_data)
-        st.success("Transaction added!")
+        try:
+            supabase.table("transactions").insert(tx_data).execute()
+            st.success("Transaction added!")
+        except Exception as e:
+            st.error(f"Error adding transaction: {e}")
+

@@ -20,6 +20,8 @@ if not is_authenticated():
         with st.form("login_form"):
             password = st.text_input("Password", type="password", placeholder="Enter founder password")
             submit = st.form_submit_button("🚀 Login", use_container_width=True)
+            print(password)
+            print(login(password))
             
             if submit:
                 if password:
@@ -38,7 +40,7 @@ else:
     # User is authenticated - show Dashboard
     import pandas as pd
     import plotly.express as px
-    from db import collection
+    from db import supabase
     
     st.title("Aurenza Money Manager")
     
@@ -53,7 +55,13 @@ else:
     st.markdown("---")
     
     # Fetch and display dashboard data
-    data = list(collection.find())
+    try:
+        result = supabase.table("transactions").select("*").execute()
+        data = result.data
+    except Exception as e:
+        st.error(f"Error fetching transactions: {e}")
+        data = []
+    
     if not data:
         st.info("No transactions yet.")
     else:
