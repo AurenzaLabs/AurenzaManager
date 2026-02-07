@@ -34,7 +34,6 @@ if not is_authenticated():
                     st.warning("⚠️ Please enter the password.")
         
         st.markdown("---")
-        st.info("💡 **Note**: All 5 founders share the same password for access.")
 
 else:
     # User is authenticated - show Dashboard
