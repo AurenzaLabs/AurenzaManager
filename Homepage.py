@@ -77,24 +77,6 @@ else:
         col2.metric("Expense", f"₹{total_expense:,.0f}")
         col3.metric("Balance", f"₹{balance:,.0f}")
         
-        # Pie chart for category breakdown
-        if "tags" in df.columns:
-            # Handle tags (multiselect) - flatten the list of tags
-            tag_amounts = []
-            for _, row in df.iterrows():
-                if row.get("tags"):
-                    for tag in row["tags"]:
-                        tag_amounts.append({"tag": tag, "amount": row["amount"]})
-            
-            if tag_amounts:
-                tag_df = pd.DataFrame(tag_amounts)
-                tag_summary = tag_df.groupby("tag")["amount"].sum().reset_index()
-                fig = px.pie(tag_summary, names="tag", values="amount", title="By Tags")
-                st.plotly_chart(fig, use_container_width=True)
-        elif "category" in df.columns:
-            fig = px.pie(df, names="category", values="amount", title="By Category")
-            st.plotly_chart(fig, use_container_width=True)
-        
         # Transaction history
         st.subheader("Transaction History")
         
