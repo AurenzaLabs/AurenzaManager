@@ -1,5 +1,9 @@
 from fastapi import APIRouter
-from backend.database import expenses_col
+
+try:
+    from backend.database import expenses_col
+except ModuleNotFoundError:
+    from database import expenses_col
 
 router = APIRouter()
 

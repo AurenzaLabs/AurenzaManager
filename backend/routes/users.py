@@ -1,6 +1,11 @@
 from fastapi import APIRouter
-from backend.database import users_col
-from backend.auth import hash_password
+
+try:
+    from backend.database import users_col
+    from backend.auth import hash_password
+except ModuleNotFoundError:
+    from database import users_col
+    from auth import hash_password
 
 router = APIRouter()
 
