@@ -6,7 +6,7 @@ This repository now includes a full React frontend implementation at `frontend-r
 
 ```powershell
 pip install -r requirements.txt
-uvicorn backend.main:app --reload --port 8000
+uvicorn main:app --reload --port 8000
 ```
 
 ## Frontend (React + Vite)
